@@ -79,16 +79,16 @@ function isLogIn (req, res, next){
 app.post('/post', isLogIn, async (req, res) => {
     const user = await userModel.findOne({email: req.user.email});
     let { content } = req.body;
-    console.log(user);
+    // console.log(user);
     let post = await postModel.create({user: req.user.id, content});
     user.posts.push(post._id);
     await user.save();
     res.redirect('/profile');
 });
 app.get('/likes/:id', isLogIn, async (req, res) => {
-    let post = await postModel.findOne({user: req.params.id}).populate('user');
+    let post = await postModel.findOne({_id: req.params.id}).populate('user');
     // if(!post){
-    console.log(req.params.id, " : ", res.user.id);
+    // console.log("req.params.id --- ",req.params.id);
     //     return res.status(404).send('Post not found');
     // }
     // console.log("id : ",req.user.id);
@@ -104,7 +104,7 @@ app.get('/likes/:id', isLogIn, async (req, res) => {
 app.get('/postUpdate/:id', isLogIn, async (req, res) => {
     let post = await postModel.findOne({user: req.params.id}).populate('user');
     res.render('edit',{post});
-    console.log(post);
+    // console.log(post);
 })
 app.post('/update/:id', isLogIn, async (req, res) => {
     let post = await postModel.findOneAndUpdate({_id: req.params.id}, {content: req.body.content});

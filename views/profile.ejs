@@ -19,7 +19,7 @@
                 <p class=""><%= post.content %></p>
                 <h4 class=""><%= post.Likes.length %> Likes</h4>
                 <a href="/postUpdate/<%= post.user %>" class="bg-yellow-700 px-1 text-white rounded">edit</a>
-                <a href="/likes/<%= post.user %>" class="bg-pink-500 p-2 rounded text-white">
+                <a href="/likes/<%= post._id %>" class="bg-pink-500 p-2 rounded text-white">
                     <%= post.Likes.indexOf(user._id)=== -1 ? "Like" : "Unlike"  %>
                 </a>
             </div>
