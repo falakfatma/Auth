@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <h1 class="text-3xl">Hello <%= user.username%></h1>
+    <form action="/post" method="post" class="flex flex-col gap-4 max-w-sm mx-auto mt-10">
+        <textarea name="content" id="" placeholder="What is in your mind"  class="w-full rounded"></textarea>
+        <button type="submit" class="bg-blue-700 ">Post</button>
+    </form>
+    <!-- <div class="mt-10 max-w-sm mx-auto border p-4 rounded"> -->
+        <% user.posts.reverse().forEach((post)=>{ %>
+            <div class="mt-10 max-w-sm mx-auto border p-4 rounded">
+                <h2 class="text-2xl"> <%=user.username%></h2>
+                <p class=""><%= post.content %></p>
+                <h4 class=""><%= post.Likes.length %> Likes</h4>
+                <a href="/postUpdate/<%= post.user %>" class="bg-yellow-700 px-1 text-white rounded">edit</a>
+                <a href="/likes/<%= post.user %>" class="bg-pink-500 p-2 rounded text-white">
+                    <%= post.Likes.indexOf(user._id)=== -1 ? "Like" : "Unlike"  %>
+                </a>
+            </div>
+        <% })%>
+            <!-- <h2 class="text-2xl"> heading</h2>
+        <p class="">paragraph</p>
+        <button class="bg-yellow-700 px-1 text-white rounded">edit</button>
+        <button>delete</button>
+    </div> -->
+
+</body>
+</html>
